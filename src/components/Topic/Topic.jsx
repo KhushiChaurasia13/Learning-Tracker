@@ -1,24 +1,49 @@
-import React from 'react'
-import Form from '../Form/Form'
-import {Link} from "react-router-dom"
+import React from "react";
+import Form from "../Form/Form";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const Topic = ({topics , setTopics}) => {
-  const [showForm , setShowForm] = React.useState(false)  
+const Topic = ({ topics, setTopics }) => {
+  const [showForm, setShowForm] = useState(false);
+
   return (
-    <>
-      <ul>
-        {topics.map((topic)=>{
-          return (<li key={topic.id}>
-            <Link to={`/topics/${topic.id}`}>
-              {topic.title}
-            </Link>
-          </li>)
-        })}
-      </ul>
-      <button onClick={()=>{setShowForm(true)}}>+Add</button>
-      {showForm && <Form setShowForm={setShowForm}  setTopics={setTopics} mode="add"/>}
-    </>
-  )
-}
+    <div className="container mt-4">
 
-export default Topic
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h2>Topics</h2>
+
+        <button
+          className="btn btn-primary"
+          onClick={() => setShowForm(true)}
+        >
+          + Add Topic
+        </button>
+      </div>
+
+      <div className="list-group">
+
+        {topics.map((topic) => (
+          <Link
+            key={topic.id}
+            to={`/topics/${topic.id}`}
+            className="list-group-item list-group-item-action fs-3"
+          >
+            {topic.title.charAt(0).toUpperCase() +topic.title.slice(1)}
+          </Link>
+        ))}
+
+      </div>
+
+      {showForm && (
+        <Form
+          setShowForm={setShowForm}
+          setTopics={setTopics}
+          mode="add"
+        />
+      )}
+
+    </div>
+  );
+};
+
+export default Topic;

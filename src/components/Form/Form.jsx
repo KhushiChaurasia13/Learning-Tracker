@@ -30,26 +30,100 @@ const Form = ({setShowForm , setTopics , topic ,mode}) => {
   }
  
   return (
-   <>
-    <form>
-        <input type="text" value={formData.title} onChange={(e)=>setFormData(prev =>({...prev , title:e.target.value}))} />
-        <select  onChange={(e)=>setFormData(prev =>({...prev , status:e.target.value}))} value={formData.status}>
-            <option value="notStarted">Not Started</option>
-            <option value="learning">Learning</option>
-            <option value="complete">Completed</option>
-            <option value="practice">Practicing</option>
-            <option value="revising">Revising</option>
-        </select>
-        <input type="text" value={question} onChange={(e)=> setQuestion(e.target.value)} />
-        <button  type="button" onClick={addQuestion}>Add Question</button>
-        <button type="button" onClick={()=>{
-          setShowForm(false)
-          Save()
-          }
-          }>Save</button>
-    </form>
-   </>
-  )
+    <div className="container mt-4">
+      <div className="card shadow p-4">
+  
+        <h3 className="mb-4">
+          {mode === "add" ? "Add Topic" : "Edit Topic"}
+        </h3>
+  
+        <form>
+  
+          <div className="mb-3">
+            <label className="form-label">Title</label>
+            <input
+              className="form-control"
+              type="text"
+              value={formData.title}
+              onChange={(e) =>
+                setFormData(prev => ({ ...prev, title: e.target.value }))
+              }
+            />
+          </div>
+  
+          <div className="mb-3">
+            <label className="form-label">Status</label>
+  
+            <select
+              className="form-select"
+              value={formData.status}
+              onChange={(e) =>
+                setFormData(prev => ({ ...prev, status: e.target.value }))
+              }
+            >
+              <option value="Not Started">Not Started</option>
+              <option value="Learning">Learning</option>
+              <option value="Completed">Completed</option>
+              <option value="Practicing">Practicing</option>
+              <option value="Revising">Revising</option>
+            </select>
+          </div>
+  
+          <div className="mb-3">
+            <label className="form-label">Question</label>
+  
+            <input
+              className="form-control"
+              type="text"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+            />
+          </div>
+  
+          <div className="d-flex gap-2">
+  
+            <button
+              type="button"
+              className="btn btn-outline-primary"
+              onClick={addQuestion}
+            >
+              Add Question
+            </button>
+  
+            <button
+              type="button"
+              className="btn btn-success"
+              onClick={() => {
+                setShowForm(false);
+                Save();
+              }}
+            >
+              Save
+            </button>
+  
+          </div>
+  
+        </form>
+  
+        {formData.questions.length > 0 && (
+          <>
+            <hr />
+  
+            <h5>Questions</h5>
+  
+            <ul className="list-group">
+              {formData.questions.map((q, i) => (
+                <li className="list-group-item" key={i}>
+                  {q}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+  
+      </div>
+    </div>
+  );
 }
 
 export default Form
