@@ -9,15 +9,15 @@ const TopicDetail = ({topics , setTopics}) => {
     const navigate = useNavigate()
     const del = () => {
       setTopics(prev => prev.filter(t => t.id !== topic.id))
-      Navigate('/')
+      navigate('/')
     }
 
    if(!topic) {
     return (
       <>
-        <h1>Topic not found</h1>
-        <button onClick={() => navigate("/")}>
-          ← Back to Home
+        <h1 className="text-center m-5">Topic not found</h1>
+        <button onClick={() => navigate("/topics")} className="btn btn-outline-primary d-block mx-auto">
+          ← Back 
         </button>
       </>
     );
@@ -34,7 +34,7 @@ const TopicDetail = ({topics , setTopics}) => {
   
       <div className="card shadow-sm p-5">
   
-        <h2 className="mb-2  fs-1 p-2">{topic.title}</h2>
+        <h2 className="mb-2  fs-1 p-2 text-capitalize">{topic.title}</h2>
   
         <span className="badge bg-secondary mb-3 p-2 fs-3 w-25">
           {topic.status}
@@ -50,9 +50,9 @@ const TopicDetail = ({topics , setTopics}) => {
           <>
             <h5>Questions</h5>
   
-            <ul className="list-group mb-3">
+            <ul className="list-group list-group-numbered mb-3">
               {topic.questions.map((q, i) => (
-                <li className="list-group-item" key={i}>
+                <li className="list-group-item text-capitalize" key={i}>
                   {q}
                 </li>
               ))}

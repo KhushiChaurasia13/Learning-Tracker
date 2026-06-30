@@ -26,9 +26,9 @@ const Topic = ({ topics, setTopics }) => {
           <Link
             key={topic.id}
             to={`/topics/${topic.id}`}
-            className="list-group-item list-group-item-action fs-3"
+            className="list-group-item list-group-item-action fs-3 text-capitalize"
           >
-            {topic.title.charAt(0).toUpperCase() +topic.title.slice(1)}
+            {topic.title}
           </Link>
         ))}
 
